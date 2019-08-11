@@ -88,7 +88,7 @@ module GrapeSwagger
           part.select { |x| x == identifier }
         end
 
-        def method
+        def method(*args)
           @route.request_method.downcase.to_sym
         end
       end
