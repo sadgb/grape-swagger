@@ -9,7 +9,7 @@ module GrapeSwagger
           @route = route
 
           description = route.settings[:description]
-          add_extension_to(path[method], extension(description)) if description && extended?(description, :x)
+          add_extension_to(path[method2], extension(description)) if description && extended?(description, :x)
 
           settings = route.settings
           add_extensions_to_operation(settings, path, route) if settings && extended?(settings, :x_operation)
@@ -53,7 +53,7 @@ module GrapeSwagger
         end
 
         def find_definition(status, path)
-          response = path[method][:responses][status]
+          response = path[method2][:responses][status]
           return if response.nil?
 
           return response[:schema]['$ref'].split('/').last if response[:schema].key?('$ref')
@@ -88,7 +88,7 @@ module GrapeSwagger
           part.select { |x| x == identifier }
         end
 
-        def method(*args)
+        def method2(*args)
           @route.request_method.downcase.to_sym
         end
       end
